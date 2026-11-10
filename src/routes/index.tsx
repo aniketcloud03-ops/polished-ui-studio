@@ -417,7 +417,8 @@ function RoleCatalog() {
                         </span>
                       ))}
                     </div>
-                    <div className="mt-auto flex items-center justify-between border-t border-border pt-4 [margin-top:max(1.5rem,auto)]">
+                    <div className="mt-auto" />
+                    <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
                       <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                         <ListChecks weight="fill" className="h-4 w-4" />
                         {role.topics.length} topic areas
