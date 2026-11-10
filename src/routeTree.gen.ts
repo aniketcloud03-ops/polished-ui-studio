@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RolesRoleIdRouteImport } from './routes/roles.$roleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RolesRoleIdRoute = RolesRoleIdRouteImport.update({
+  id: '/roles/$roleId',
+  path: '/roles/$roleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/roles/$roleId': typeof RolesRoleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/roles/$roleId': typeof RolesRoleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/roles/$roleId': typeof RolesRoleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/roles/$roleId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/roles/$roleId'
+  id: '__root__' | '/' | '/roles/$roleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RolesRoleIdRoute: typeof RolesRoleIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roles/$roleId': {
+      id: '/roles/$roleId'
+      path: '/roles/$roleId'
+      fullPath: '/roles/$roleId'
+      preLoaderRoute: typeof RolesRoleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RolesRoleIdRoute: RolesRoleIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
