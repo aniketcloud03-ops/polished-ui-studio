@@ -498,8 +498,8 @@ function ReportTeaser() {
             </a>
           </Button>
           <Button asChild variant="stage" size="lg">
-            <Link to="/interviews/$id" params={{ id: "sample-genai" }}>
-              View a sample report
+            <Link to="/interviews">
+              View sample reports
             </Link>
           </Button>
         </Reveal>

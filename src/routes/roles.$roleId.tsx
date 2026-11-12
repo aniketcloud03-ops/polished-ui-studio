@@ -16,6 +16,8 @@ import { FlowStepper } from "@/components/flow-stepper";
 import { Button } from "@/components/ui/button";
 import { Reveal, EASE } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
+import { createInterview } from "@/lib/api";
+import { DEFAULT_CHARACTER_ID } from "@/lib/characters";
 
 export const Route = createFileRoute("/roles/$roleId")({
   loader: ({ params }) => {
@@ -213,7 +215,10 @@ function RoleSetup() {
                 variant="hero"
                 size="lg"
                 className="mt-6 w-full"
-                onClick={() => navigate({ to: "/check", search: { role: role.id, level, duration } })}
+                onClick={async () => {
+                  await createInterview({ roleId: role.id, level, duration, characterId: DEFAULT_CHARACTER_ID });
+                  navigate({ to: "/interviews" });
+                }}
               >
                 Continue to mic check
                 <ArrowRight weight="bold" />
